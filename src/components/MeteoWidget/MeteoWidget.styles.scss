@@ -1,0 +1,30 @@
+@import '../../scss/shared.style.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px;
+}
+
+h1 {
+  font-family: var(--font, $fontDefault);
+  font-weight: 900;
+  font-size: 75px;
+  color: var(--secondary, $secondaryDefault);
+  margin-bottom: 85px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.loader {
+  position: absolute;
+  position: absolute;
+  right: -70px;
+  top: 4px;
+}
+
+.invisible {
+  display: none;
+}
