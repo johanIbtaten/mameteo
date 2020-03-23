@@ -1,0 +1,124 @@
+@import '../../scss/shared.style.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+.city-card {
+  opacity: 0;
+  animation: fadeIn 2s;
+  animation-fill-mode: forwards;
+  width: 300px;
+  height: 430px;
+  border-radius: 37px;
+  border: 3px solid var(--borderCard, $borderCardDefault);
+  background: var(--bgCard, $bgCardDefault);
+  box-shadow: 0px 9px 0px 0px rgba($shadowDefault, 0.29);
+  padding: 10px 25px;
+  font-family: var(--font, $fontDefault);
+  font-weight: 800;
+  color: var(--secondary, $secondaryDefault); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 30px;
+  
+  .city-name {
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 7px;    
+
+    .country {
+      padding: 3px 12px;
+      font-size: 14px;
+      border-radius: 30px;
+      position: relative;
+      top: -5px;
+      margin-left: 3px;
+      color: $txtLight;
+      background: var(--primary, $primaryDefault);
+    }    
+  }
+
+  .city-day, .city-name {
+    align-self: flex-start;
+    margin-left: 5px;
+  }
+
+  .city-day {
+    color: $shadowDefault;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  
+  .city-description {
+    font-size: 21px;
+    position: relative;
+    top: -16px;
+  }
+  
+  .city-temp {
+    font-size: 68px;
+    position: relative;
+    top: -10px;
+    right: -10px;
+  }
+
+  figure {
+    margin-top: 40px;
+    margin-bottom: 0;
+  }
+
+}
+
+:host(.big-card) .city-card {
+  width: 524px;
+  height: 400px !important;
+  margin-left: 0;
+  position: relative;
+  padding: 78px 65px 25px 25px;
+
+  .city-day, .city-name {
+    align-self: flex-end;
+    margin: 0;
+  }
+
+  .city-temp {
+    margin-top: 50px;
+    font-size: 84px;
+    right: 0;
+  }
+
+  .city-description {
+    margin-right: 19px;
+    width: 190px;
+    text-align: right;
+  }
+
+  .city-description, .city-temp {
+    align-self: flex-end;
+  }
+
+  figure {
+    position: absolute;
+    margin: 0;
+    top: 110px;
+    left: 82px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
