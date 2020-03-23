@@ -66,9 +66,9 @@ class MeteoWidget extends HTMLElement {
     
     loaderElement.classList.remove('invisible')
     if (type === 'local') {
-      apiURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=fr&appid=${apiKey}`
+      apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=fr&appid=${apiKey}`
     } else {
-      apiURL = `http://api.openweathermap.org/data/2.5/${type}?q=${this._search}&units=metric&lang=fr&appid=${apiKey}`
+      apiURL = `https://api.openweathermap.org/data/2.5/${type}?q=${this._search}&units=metric&lang=fr&appid=${apiKey}`
     }
 
     fetch(apiURL)
