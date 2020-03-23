@@ -9,6 +9,7 @@ a {
   text-decoration: none;
 }
 
+
 .city-card {
   opacity: 0;
   animation: fadeIn 2s;
@@ -27,7 +28,6 @@ a {
   flex-direction: column;
   align-items: center;
   margin-left: 30px;
-  margin-bottom: 40px;
   
   .city-name {
     font-size: 25px;
