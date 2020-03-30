@@ -103,15 +103,15 @@ class MeteoWidget extends HTMLElement {
             }
 
             const dateNow = new Date(list[0].dt_txt);
-            console.log(dateNow.getDate()); ///////////////////////////////////            
-
+            
             const listFiltered =  list.filter((item) => {
               const date = new Date(item.dt_txt);
+
               if (dateNow.getHours() == 0) {
                 return (date.getHours() == 15);
               } else {
-                return (date.getHours() == 15 && (date.getDate() > dateNow.getDate()));
-              }
+                return (date.getHours() == 15 && (date.setHours(0,0,0,0)) > (dateNow.setHours(0,0,0,0)));
+              }              
             });
 
             console.log('listFiltered', listFiltered);  ///////////////////////////////////
