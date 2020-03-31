@@ -108,9 +108,9 @@ class MeteoWidget extends HTMLElement {
               const date = new Date(item.dt_txt);
 
               if (dateNow.getHours() == 0) {
-                return (date.getHours() == 15);
+                return date.getHours() == 15;
               } else {
-                return (date.getHours() == 15 && (date.setHours(0,0,0,0)) > (dateNow.setHours(0,0,0,0)));
+                return date.getHours() == 15 && date.setHours(0,0,0,0) > dateNow.setHours(0,0,0,0);
               }              
             });
 
