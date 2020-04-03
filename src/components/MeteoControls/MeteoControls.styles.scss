@@ -28,6 +28,10 @@ button {
   overflow: hidden;
   position: relative;
 
+  &:first-child {
+    margin-left: 0;
+  }
+
   &::before,
   &::after {
     background: rgba($primaryDefault, 0.15);
