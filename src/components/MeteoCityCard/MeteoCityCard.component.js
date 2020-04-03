@@ -3,7 +3,7 @@ import styles from './MeteoCityCard.styles.scss';
 const template = document.createElement('template');
 template.innerHTML = `
   <style>${styles.toString()}</style>
-  <li class="city-card">
+  <li class="city-card fade-in">
     <h2 class="city-name">
       <span></span>
       <span class="country"></span>

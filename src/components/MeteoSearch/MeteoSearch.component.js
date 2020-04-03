@@ -13,7 +13,7 @@ template.innerHTML = `
         </label>
     </form>
   </div>
-  <span class="error-message"></span>
+  <span class="error-message fade-in"></span>
 `;
 class MeteoSearch extends HTMLElement {
   
@@ -67,7 +67,7 @@ class MeteoSearch extends HTMLElement {
       
       const searchEvent = new CustomEvent("search", {
         bubbles: true,
-        composed: true, // Laisse passer l'event à en dehors du périmètre du shadowDOM
+        composed: true, // Laisse passer l'event en dehors du périmètre du shadowDOM
         detail: this._searchValue
       });
 
