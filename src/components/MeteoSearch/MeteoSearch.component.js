@@ -9,8 +9,8 @@ template.innerHTML = `
       <label>
         <span>Ville</span>
         <input type="text" placeholder="Ex : Paris ou Paris,US" value=''>
-      </label>
-      <button type="submit">Voir la météo !</button>
+        <span class="loader"><img src="img/loader.svg" alt="loader"></span>
+        </label>
     </form>
   </div>
   <span class="error-message"></span>
@@ -19,11 +19,20 @@ class MeteoSearch extends HTMLElement {
   
   set errorMessage(value) {
     this._errorMessage = value;
-    this.render();
+    this.render('errors');
   }
   
   get errorMessage() {
     return this._errorMessage;
+  }
+
+  set isLoading(value) {
+    this._isLoading = value;
+    this.render();
+  }
+  
+  get isLoading() {
+    return this._isLoading;
   }
 
   constructor() {
@@ -31,6 +40,9 @@ class MeteoSearch extends HTMLElement {
 
     this._searchValue = '';
     this._errorMessageElement;
+    this._loaderElement;
+
+    this._isLoading = false;
 
     this.attachShadow({mode: 'open'});
 
@@ -41,6 +53,7 @@ class MeteoSearch extends HTMLElement {
     const form = this.shadowRoot.querySelector('form')
     const inputSearch = this.shadowRoot.querySelector('form input') 
     this._errorMessageElement = this.shadowRoot.querySelector('.error-message')
+    this._loaderElement = this.shadowRoot.querySelector('.loader')
     
     inputSearch.focus()   
 
@@ -68,9 +81,19 @@ class MeteoSearch extends HTMLElement {
     });
   }
 
-  render() {
-    this._errorMessageElement.textContent = this._errorMessage
-    this._errorMessageElement.style.display = 'inline-block';
+  render(errors) {
+    if (errors) {
+      this._errorMessageElement.textContent = this._errorMessage
+      this._errorMessageElement.style.display = 'inline-block';
+    } else {
+      if (this._isLoading) {
+        this._loaderElement.classList.remove('invisible')
+      } else {
+        this._loaderElement.classList.add('invisible')
+      }
+    }
+
+
   }
 }
 

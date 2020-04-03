@@ -4,9 +4,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>${styles.toString()}</style>
   <div class="container">
-    <h1>Ma météo 
-      <span class="loader"><img src="img/loader.svg" alt="loader"></span>
-    </h1>
+    <h1>Ma météo</h1>
     <meteo-search></meteo-search>
     <meteo-controls></meteo-controls>
     <meteo-cities></meteo-cities>
@@ -54,7 +52,6 @@ class MeteoWidget extends HTMLElement {
     const meteoSearchElement = this.shadowRoot.querySelector('meteo-search')    
     const meteoCitiesElement = this.shadowRoot.querySelector('meteo-cities');
     const meteoControlsElement = this.shadowRoot.querySelector('meteo-controls')  
-    const loaderElement = this.shadowRoot.querySelector('.loader')  
     
     const errorMessage = "Merci d'indiquer un nom de ville valide 😅"
 
@@ -64,7 +61,8 @@ class MeteoWidget extends HTMLElement {
     
     console.log(lat, long); //////////////////////////////////////////
     
-    loaderElement.classList.remove('invisible')
+    meteoSearchElement.isLoading = true
+
     if (type === 'local') {
       apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=fr&appid=${apiKey}`
     } else {
@@ -80,7 +78,7 @@ class MeteoWidget extends HTMLElement {
         if (json.cod == 200) {
           meteoControlsElement.classList.add('visible');
           meteoControlsElement.type = type;
-          loaderElement.classList.add('invisible')
+          meteoSearchElement.isLoading = false
         }                 
             
           const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -171,7 +169,7 @@ class MeteoWidget extends HTMLElement {
           }         
       })
       .catch(() => {
-        loaderElement.classList.add('invisible')          
+        meteoSearchElement.isLoading = false
         meteoSearchElement.errorMessage = errorMessage;
       });
   }
