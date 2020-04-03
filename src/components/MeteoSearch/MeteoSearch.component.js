@@ -1,4 +1,5 @@
 import styles from './MeteoSearch.styles.scss';
+import debounce from '../../utils/utils'
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -41,31 +42,30 @@ class MeteoSearch extends HTMLElement {
     const inputSearch = this.shadowRoot.querySelector('form input') 
     this._errorMessageElement = this.shadowRoot.querySelector('.error-message')
     
-    inputSearch.focus()    
-    
-    form.addEventListener("submit", e => {
-      console.log('I am form.'); //////////////////////////////////
-      console.log('this._searchValue', this._searchValue); //////////////////////////////////
-      e.preventDefault();
-      this._errorMessageElement.style.display = 'none';
-      if (inputSearch.value === '') {
-        this._errorMessageElement.style.display = 'inline-block';  
-        this._errorMessageElement.textContent = "Merci de remplir la recherche 😅"
-        return
-      }
-      this._searchValue = inputSearch.value;
+    inputSearch.focus()   
 
+    console.log(debounce)
+    
+    inputSearch.addEventListener('keyup', debounce((e) => {
+
+      this._errorMessageElement.style.display = 'none';
+
+      this._searchValue = inputSearch.value;
+      
       const searchEvent = new CustomEvent("search", {
         bubbles: true,
         composed: true, // Laisse passer l'event à en dehors du périmètre du shadowDOM
         detail: this._searchValue
       });
-      
-      console.log(searchEvent); ///////////////////////////////////
-  
-      this.dispatchEvent(searchEvent);
-    });
 
+      if (this._searchValue != '') {
+        this.dispatchEvent(searchEvent);
+      } 
+    }, 800))
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+    });
   }
 
   render() {
