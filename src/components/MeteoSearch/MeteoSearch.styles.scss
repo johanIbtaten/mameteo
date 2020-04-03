@@ -37,7 +37,8 @@ form {
     outline: none;
     color: inherit;    
     height: 40px;
-    padding: 5px 5px 16px 5px;
+    //padding: 5px 5px 16px 5px;
+    padding: 5px 60px 16px 5px;
     border-bottom: 2px solid var(--primary, $primaryDefault);
     color: $secondaryDefault;
     width: 425px;
@@ -88,8 +89,8 @@ form {
 
 .loader {
   position: absolute;
-  top: 17px;
-  right: -70px;
+  top: 1px;
+  right: 1px;
 }
 
 .invisible {
