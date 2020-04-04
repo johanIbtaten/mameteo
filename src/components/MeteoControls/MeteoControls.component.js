@@ -5,7 +5,7 @@ template.innerHTML = `
   <style>${styles.toString()}</style>
   <div class="meteo-controls">
     <button class="btn-today">Aujourd'hui</button>
-    <button class="btn-forecast">5 prochains jours</button>
+    <button class="btn-forecast">Prochains jours</button>
   </div>
 `;
 
