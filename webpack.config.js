@@ -67,6 +67,9 @@ module.exports = {
       template: path.resolve(__dirname, 'index.html'),
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: ['!.git', '!*.git*'],
+    }),
   ],
 };
