@@ -5,7 +5,7 @@ template.innerHTML = `
   <style>${styles.toString()}</style>
   <div class="meteo-controls">
     <button class="btn-today">Aujourd'hui</button>
-    <button class="btn-forecast">Prochains jours</button>
+    <button class="btn-forecast">Semaine</button>
   </div>
 `;
 
@@ -31,8 +31,10 @@ class MeteoControls extends HTMLElement {
   }
 
   connectedCallback(){
+
+    
     const btnToday = this.shadowRoot.querySelector('.btn-today')
-    const btnForecast = this.shadowRoot.querySelector('.btn-forecast')    
+    const btnForecast = this.shadowRoot.querySelector('.btn-forecast')   
   
     btnForecast.addEventListener("click", e => {
       e.preventDefault();
