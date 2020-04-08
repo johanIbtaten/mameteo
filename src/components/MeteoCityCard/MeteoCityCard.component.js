@@ -1,4 +1,5 @@
 import styles from './MeteoCityCard.styles.scss';
+import debounce from '../../utils/utils'
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -43,13 +44,37 @@ class MeteoCityCard extends HTMLElement {
   constructor() {
     super()
 
+    this._breakpoints = new Map([
+      ['sm', '576px'],
+      ['md', '768px'],
+      ['lg', '992px'],
+      ['xl', '1200px']
+    ]);
+
+    this._colorSkycon = '#FCC418'
+
     const shadowDOM = this.attachShadow({ mode: 'open' })
 
     shadowDOM.appendChild(template.content.cloneNode(true))
   }
+
+
+  connectedCallback() {
+    window.addEventListener('resize', debounce((e) => {
+      console.log('debounce');
+      this.render()
+    }, 500))
+  }  
+ 
   
   render() {
-
+    console.log('Je render');
+    // this._breakpoints = new Map([
+    //   ['sm', '576px'],
+    //   ['md', '768px'],
+    //   ['lg', '992px'],
+    //   ['xl', '1200px']
+    // ]);
     // const dictIcon = {
     //   '01d': 'wi-day-sunny',
     //   '02d': 'wi-day-cloudy',
@@ -70,6 +95,7 @@ class MeteoCityCard extends HTMLElement {
     //   '13n': 'wi-night-alt-snow',
     //   '50n': 'wi-night-fog'
     // };  
+    console.log("this._breakpoints.get('sm')", this._breakpoints.get('sm'));
 
     const dictSkyIcon = {
       '01d': Skycons.CLEAR_DAY,
@@ -94,27 +120,46 @@ class MeteoCityCard extends HTMLElement {
 
     console.log('typeCanvas', this._type); ///////////////////////////////////////////
 
-    const canvas = this.shadowRoot.querySelector('canvas')
-    if (this._type === 'big-card' ) {
-      canvas.setAttribute('width', 175);
-      canvas.setAttribute('height', 175);
-    } else {
-      canvas.setAttribute('width', 115);
-      canvas.setAttribute('height', 115);
-    }
+    let jourNom = this._datas.jour[0]
+    let nombreDate = this._datas.jour[1]
+    let moisNom = this._datas.jour[2]
+    
 
+    const canvas = this.shadowRoot.querySelector('canvas')    
+    
+    if (this._type === 'big-card' ) {
+        if (window.matchMedia(`(max-width: ${this._breakpoints.get('sm')})`).matches) {
+          canvas.setAttribute('width', 100);
+          canvas.setAttribute('height', 100);
+        } else {
+          canvas.setAttribute('width', 175);
+          canvas.setAttribute('height', 175);
+        }
+      } else {
+      if (window.matchMedia(`(max-width: ${this._breakpoints.get('sm')})`).matches) {
+        canvas.setAttribute('width', 61);
+        canvas.setAttribute('height', 61);
+        jourNom = jourNom.substring(0, 3) + '.'
+        nombreDate = ('0' + this._datas.jour[1]).slice(-2)
+      } else {
+        canvas.setAttribute('width', 115);
+        canvas.setAttribute('height', 115);
+      }
+    }
+    
+   
     this.shadowRoot.querySelector('.city-name span').textContent = this._datas.name
     this.shadowRoot.querySelector('.city-name .country').textContent = this._datas.country
     this.shadowRoot.querySelector('.city-temp span').textContent = Math.round(this._datas.temperature)+'°'
     this.shadowRoot.querySelector('.city-description').textContent = this._datas.description
-    this.shadowRoot.querySelector('.city-day').textContent = this._datas.jour
+    this.shadowRoot.querySelector('.city-day').textContent = `${jourNom} ${nombreDate} ${moisNom}`
 
     //this.shadowRoot.querySelector('.city-icon').src = `http://openweathermap.org/img/w/${this._datas.icon}.png`;
     //this.shadowRoot.querySelector('.city-icon').alt = this._datas.description;    
     //this.shadowRoot.querySelector('.city-icon-wi').src = `img/${dictIcon[this._datas.icon]}.svg`;
     //this.shadowRoot.querySelector('.city-icon').alt = this._datas.description;
 
-    var icons = new Skycons({"color": "#FCC418"});
+    var icons = new Skycons({"color": this._colorSkycon});
     icons.set(this.shadowRoot.querySelector('.skycon'), dictSkyIcon[this._datas.icon]);
     icons.play();
   }
