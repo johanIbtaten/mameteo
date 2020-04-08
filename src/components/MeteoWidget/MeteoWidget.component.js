@@ -23,7 +23,7 @@ class MeteoWidget extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true))    
   }
 
-  connectedCallback(){  
+  connectedCallback() {  
     
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -116,9 +116,14 @@ class MeteoWidget extends HTMLElement {
                 
             const forecastData = listFiltered.map( item => {
               const date = new Date(item.dt*1000);
+
+
               
               let jourActuel = date.toLocaleDateString('fr-FR', options);
               jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
+              jourActuel = jourActuel.split(' ');
+
+              console.log('jourActuel', jourActuel);  ///////////////////////////////////
 
               let description = item.weather[0].description;
               description = description.charAt(0).toUpperCase() + description.slice(1);
@@ -143,6 +148,7 @@ class MeteoWidget extends HTMLElement {
 
             let jourActuel = date.toLocaleDateString('fr-FR', options);
             jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
+            jourActuel = jourActuel.split(' ');
 
             let description = json.weather[0].description;
             description = description.charAt(0).toUpperCase() + description.slice(1);
