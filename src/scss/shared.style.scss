@@ -1,9 +1,11 @@
+// VARIABLES ///////////////////
 $primaryDefault: #73296B;
 $secondaryDefault: #2A3152;
 
 $txtLight: #FFFFFF;
 
 $bgCardDefault: #FFFFFF;
+//$borderCardDefault: #f0f1f3;
 $borderCardDefault: #F8F6F7;
 
 
@@ -11,6 +13,51 @@ $dangerDefault: #FF0000;
 $shadowDefault: #AAADBA;
 
 $fontDefault: 'Nunito', sans-serif;
+
+
+
+// MIXINS ///////////////////
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+@mixin respond-down($breakpoint) {
+  // Si la clé passé en argument existe dans la map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // On écrit une media query max-width avec la valeur
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } 
+  // Si la clé passé en argument n'existe pas dans la map
+  @else {
+    // On affiche dans la console un avertissement
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+
+
+// CLASSES CSS ///////////////////
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+}
+
+[tabindex="-1"]:focus {
+  outline: 0 !important;
+}
 
 .fade-in {
   opacity: 0;
