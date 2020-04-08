@@ -59,6 +59,14 @@ body {
   outline: 0 !important;
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 .fade-in {
   opacity: 0;
   animation: fadeIn 2s;
