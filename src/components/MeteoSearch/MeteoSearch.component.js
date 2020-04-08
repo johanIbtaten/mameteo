@@ -9,7 +9,7 @@ template.innerHTML = `
       <label>
         <span>Ville</span>
         <input type="text" placeholder="Ex : Paris ou Paris,US" value=''>
-        <span class="loader fade-in"><img src="img/loader.svg" alt="loader"></span>
+        <span class="loader fade-in invisible"><img src="img/loader.svg" alt="loader"></span>
         </label>
     </form>
   </div>
