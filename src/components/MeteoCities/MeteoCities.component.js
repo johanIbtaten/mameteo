@@ -47,6 +47,7 @@ class MeteoCities extends HTMLElement {
       const card = document.createElement('meteo-city-card');
       card.classList.add('fadein');
       card.classList.add(this._type);
+      card.classList.add(`card-${index}`);
       card.type = this._type;
       card.datas = item;
       this.appendChild(card);
