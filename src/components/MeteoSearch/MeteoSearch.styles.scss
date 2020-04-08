@@ -2,6 +2,10 @@
 
 :host {
   margin-bottom: 40px;
+  @include respond-down(sm) {
+    margin-bottom: 20px;
+    margin-top: 66px;
+  }
 }
 
 .searchWrapper {
@@ -15,10 +19,10 @@ form {
   display: flex;
   align-items: flex-end;
   margin-bottom: 10px;
-
+  
   label {
     z-index: 1;
-
+    
     span {
       position: absolute;
       top: -36px;
@@ -28,7 +32,19 @@ form {
       font-weight: 700;
       text-transform: uppercase;
       color: var(--primary, $primaryDefault);
+      
+      @include respond-down(sm) {
+        font-size: 19px;
+        display: none;
+      }
+      
     }
+  }
+  
+  input, button {
+    font-size: 27px;
+    font-family: var(--font, $fontDefault);
+    font-weight: 700;
   }
 
   input {        
@@ -36,14 +52,19 @@ form {
     background: none;
     outline: none;
     color: inherit;    
-    height: 40px;
-    //padding: 5px 5px 16px 5px;
+    height: 60px;
+    width: 427px;
     padding: 5px 60px 16px 5px;
     border-bottom: 2px solid var(--primary, $primaryDefault);
     color: $secondaryDefault;
-    width: 425px;
     &::placeholder {
       color: #DFDFDF; 
+    }
+
+    @include respond-down(sm) {
+      width: 100%;
+      font-size: 22px;
+      padding: 5px 52px 10px 5px
     }
   }
 
@@ -69,11 +90,6 @@ form {
     }   
   }
 
-  input, button {
-    font-size: 27px;
-    font-family: var(--font, $fontDefault);
-    font-weight: 700;
-  }
 }
 
 .error-message {

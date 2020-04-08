@@ -1,21 +1,14 @@
 @import '../../scss/shared.style.scss';
 
-* {
-  box-sizing: border-box;
+:host {
+  @include respond-down(sm) {
+    width: 100%;
+  }
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 
 .city-card {
-  // opacity: 0;
-  // animation: fadeIn 2s;
-  // animation-fill-mode: forwards;
   width: 300px;
-  height: 430px;
+  height: 425px;
   border-radius: 37px;
   border: 3px solid var(--borderCard, $borderCardDefault);
   background: var(--bgCard, $bgCardDefault);
@@ -29,11 +22,17 @@ a {
   align-items: center;
   margin-left: 30px;
   margin-bottom: 40px;
+  position: relative;
+  
+  .city-day, .city-name {
+    align-self: flex-start;
+    margin-left: 5px;
+  }
   
   .city-name {
     font-size: 25px;
     font-weight: 800;
-    margin-bottom: 7px;    
+    margin-bottom: 4px;  
 
     .country {
       padding: 3px 12px;
@@ -47,11 +46,6 @@ a {
     }    
   }
 
-  .city-day, .city-name {
-    align-self: flex-start;
-    margin-left: 5px;
-  }
-
   .city-day {
     color: $shadowDefault;
     text-transform: uppercase;
@@ -62,44 +56,143 @@ a {
     font-size: 21px;
     position: relative;
     top: -16px;
+    text-align: center;
+    
+    @include respond-down(sm) {
+      top: 0;
+    }
   }
-  
+    
   .city-temp {
     font-size: 68px;
     position: relative;
     top: -10px;
     right: -10px;
   }
-
+  
   figure {
     margin-top: 40px;
     margin-bottom: 0;
   }
+  
+  
+}
 
+:host(.small-card) .city-card {
+  @include respond-down(sm) {
+    width: 294px;
+    height: auto !important;
+    padding: 25px 15px 50px 20px;
+    margin: 0 auto;
+    flex-direction: row;    
+    margin-bottom: 25px;
+    align-content: center;
+
+    .city-name {
+        position: absolute;
+        top: -54px;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translateX(-50%);
+        display: none;
+    }
+
+    .city-day {
+        word-spacing: 100vw;
+        align-self: auto;
+    }
+
+    .city-description {
+        top: 103px;
+        position: absolute;
+        left: 50%;
+        width: 240px;
+        text-align: center;
+        transform: translateX(-50%);
+        font-size: 18px;
+    }
+    
+    .city-temp {
+        font-size: 43px;
+        position: static;
+        text-align: right;
+    }
+    
+    figure {
+        margin: 0;
+        text-align: left;
+    }
+  
+    .city-day, .city-temp, figure {
+        flex-basis: 100%;
+    }
+  }
+}
+
+:host(.card-0) .city-card {
+  @include respond-down(sm) {
+    margin-top: 54px;
+
+    .city-name {
+      display: block;
+      margin: 0;
+    }
+  }
 }
 
 :host(.big-card) .city-card {
   width: 524px;
-  height: 400px !important;
+  height: 383px !important;
   margin-left: 0;
   position: relative;
-  padding: 78px 65px 25px 25px;
+  padding: 66px 65px 25px 25px;
+  flex-direction: column;
+  
+  @include respond-down(sm) {
+    width: 294px;
+    height: auto !important;
+    padding: 27px 30px 15px 30px;
+    margin: 0 auto;
+  }
 
   .city-day, .city-name {
     align-self: flex-end;
     margin: 0;
+
+    @include respond-down(sm) {
+      position: static;
+      align-self: flex-start;
+    }
+  }
+
+  .city-name {
+    position: relative;
+    top: -2px;
   }
 
   .city-temp {
     margin-top: 50px;
     font-size: 84px;
-    right: 0;
-  }
+    right: -5px;
 
+    @include respond-down(sm) {
+      margin-top: 34px;
+      font-size: 68px;
+      margin-right: -5px;
+    }
+  }
+  
   .city-description {
-    margin-right: 19px;
+    margin-right: 0;
     width: 190px;
     text-align: right;
+
+    @include respond-down(sm) {
+      margin: 10px auto 16px;
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .city-description, .city-temp {
@@ -109,8 +202,14 @@ a {
   figure {
     position: absolute;
     margin: 0;
-    top: 110px;
+    top: 120px;
     left: 82px;
+
+    @include respond-down(sm) {
+      top: 103px;
+      left: 31px;
+    }
   }
+
 }
 

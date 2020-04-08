@@ -6,6 +6,10 @@
   align-items: center;
   flex-direction: column;
   padding: 0 15px;
+
+  @include respond-down(sm) {
+    padding: 0 5px;
+  }
 }
 
 h1 {
@@ -16,6 +20,18 @@ h1 {
   margin-bottom: 85px;
   margin-top: 40px;
   position: relative;
+
+  @include respond-down(sm) {
+    margin: 0;
+    font-size: 32px;
+    width: 100%;
+    background-color: var(--primary, $primaryDefault);
+    color: $txtLight;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    padding: 8px 20px;
+  }
 }
 
 .loader {
